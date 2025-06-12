@@ -1,4 +1,4 @@
-rojeto P2P Escalável  
+Projeto P2P Escalável  
 **Disciplina:** Sistemas Distribuídos  
 **Professor:** Prof. Me. Michel Junio  
 
