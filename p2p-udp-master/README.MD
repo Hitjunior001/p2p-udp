@@ -38,16 +38,8 @@ Desenvolver um sistema peer-to-peer (P2P) com as seguintes características:
 /tasks # ZIPs de tarefas a serem distribuídas
 /results # ZIPs de resultados processados
 
-markdown
-Copiar
-Editar
-
 **No Peer:**
 /work # Diretório temporário para extração e execução
-
-yaml
-Copiar
-Editar
 
 ---
 
@@ -62,7 +54,7 @@ Editar
 
 ### 🧭 `master_udp_server.py`
 
-Peer central (Master) que responde a solicitações de descoberta e mantém conexões TCP com os peers.
+Peer TCP (Master) que responde a solicitações de descoberta e mantém conexões TCP com os peers.
 
 #### Mensagens UDP recebidas:
 - **DISCOVER_MASTER**
@@ -76,9 +68,7 @@ Peer central (Master) que responde a solicitações de descoberta e mantém cone
 Mensagens TCP:
 REGISTER
 
-json
-Copiar
-Editar
+
 // Enviado pelo peer:
 {
   "action": "REGISTER",
@@ -89,9 +79,6 @@ Editar
 { "status": "REGISTERED" }
 HEARTBEAT
 
-json
-Copiar
-Editar
 // Enviado periodicamente pelo peer:
 {
   "action": "HEARTBEAT",
@@ -105,9 +92,6 @@ Peer que participa da rede e realiza o processo de descoberta, registro e execu�
 Ações disponíveis:
 DISCOVER_MASTER – Envia broadcast UDP:
 
-json
-Copiar
-Editar
 {
   "action": "DISCOVER_MASTER",
   "peer_id": "<uuid-peer>",
@@ -115,9 +99,6 @@ Editar
 }
 REGISTER – Estabelece conexão TCP com o Master:
 
-json
-Copiar
-Editar
 {
   "action": "REGISTER",
   "peer_id": "<uuid-peer>",
@@ -125,9 +106,6 @@ Editar
 }
 HEARTBEAT – Mantém a conexão viva com o Master:
 
-json
-Copiar
-Editar
 {
   "action": "HEARTBEAT",
   "peer_id": "<uuid-peer>"
@@ -136,18 +114,12 @@ Editar
 Ciclo completo:
 REQUEST_TASK – Peer solicita uma tarefa:
 
-json
-Copiar
-Editar
 {
   "action": "REQUEST_TASK",
   "peer_id": "<uuid-peer>"
 }
 TASK_PACKAGE – Master envia a tarefa:
 
-json
-Copiar
-Editar
 {
   "action": "TASK_PACKAGE",
   "task_name": "exemplo.zip",
@@ -158,9 +130,6 @@ O ZIP é extraído em work/<task_name>/, onde main.py é executado sobre input.c
 
 SUBMIT_RESULT – Peer envia os resultados ao Master:
 
-json
-Copiar
-Editar
 {
   "action": "SUBMIT_RESULT",
   "peer_id": "<uuid-peer>",
@@ -169,7 +138,4 @@ Editar
 }
 Confirmação do Master:
 
-json
-Copiar
-Editar
 { "status": "OK" }
